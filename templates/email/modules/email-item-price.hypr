@@ -1,0 +1,41 @@
+<html><body style="background-color: white; width: 100%; min-width: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; margin: 0; padding: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; text-align: left; line-height: 19px; font-size: 14px;">{% with item.productDiscounts|first as itemHasDiscount %}
+	{% if item.unitPrice.discountAmount %}
+		{% if itemHasDiscount %} 
+			<span class="mz-item-price is-crossedout" style="text-decoration: line-through;">
+				{{ item.unitPrice.baseAmount|currency }}
+			</span>
+			<br />
+			<span class="mz-item-price is-saleprice">
+				{{ item.unitPrice.discountedAmount|currency }}
+			</span>
+			<br />
+			{% comment %} Item-level discounts {% endcomment %}
+			{% for productDiscount in item.productDiscounts %}
+				<div class="mz-item-discount">
+					<small class="grey mz-item-discountname" style="font-size: 10px; color: lightgrey;">
+						{{ productDiscount.discount.name }}
+					</small>
+
+					{% if productDiscount.discount.freeShipping %}
+						<small class="grey mz-item-discountamt" style="font-size: 10px; color: lightgrey;">
+							{{ labels.freeShipping }}
+						</small>
+					{% else %}
+						<small class="grey mz-item-discountamt" style="font-size: 10px; color: lightgrey;">
+							({{ productDiscount.impact|currency }} off)
+						</small>
+					{% endif %}
+				</div>
+			{% endfor %}
+		{% else %}
+			<span class="mz-item-price">
+				{{ item.unitPrice.extendedAmount|currency }}
+			</span>
+		{% endif %}
+	{% else %}
+		<span class="mz-item-price">
+			{{ item.unitPrice.extendedAmount|currency }}
+		</span>
+	{% endif %}
+{% endwith %}
+</body></html>

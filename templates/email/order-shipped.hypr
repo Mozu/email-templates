@@ -1,0 +1,130 @@
+{% extends "email/email" %}
+
+{% block body-content %}
+	<!-- basic message -->
+	<table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; margin: 0 auto; width: 580px;">
+		<tr style="padding: 0; vertical-align: top; text-align: left;">
+			<td class="intro" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 0px 0px 10px; vertical-align: top; text-align: left; padding-bottom: 20px; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px; padding-top: 10px;">
+				<p class="greeting" style="margin: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px; margin-bottom: 10px;">
+					{{ labels.orderWelcome }} {{model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingContact.lastNameOrSurname }},
+				</p>
+
+				<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">
+					{{ labels.orderShipmentBlob1|string_format(siteContext.generalSettings.websiteName, domainName, model.fulfillmentInfo.shippingMethodName)|safe }}
+				</p>
+			</td>
+		</tr>
+	</table>
+
+	<!-- order information -->
+	<table class="twelve columns details" style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; margin: 0 auto; width: 580px; margin-bottom: 10px;">
+		<thead>
+			<tr style="padding: 0; vertical-align: top; text-align: left;">
+				<td colspan="2" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: left; padding-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">{{ labels.orderDetails }}</td>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr style="padding: 0; vertical-align: top; text-align: left;">
+				<td width="50%" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 10px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px;">
+					<p style="margin: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px; margin-bottom: 10px;">
+						<strong>{{ labels.orderNo }}:</strong><br />
+						{{ model.orderNumber }}
+					</p>
+
+					<p style="margin: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px; margin-bottom: 10px;">
+						<strong>{{ labels.orderDate }}:</strong><br />
+						{{ model.auditInfo.createDate|date:"F j, Y" }}
+					</p>
+
+					<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">
+						<strong>{{ labels.trackingNumber}}:</strong><br />
+						{% for package in model.packages %}
+							{{ package.trackingNumber }}<br />
+						{% endfor %}
+					</p>
+				</td>
+
+				<td width="50%" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 10px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px;">
+					<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">
+						<strong>{{ labels.shipTo }}:</strong><br />
+						{% include "emails/modules/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+					</p>
+				</td>
+			</tr>
+		</tbody>
+
+		<tfoot>
+				<tr style="padding: 0; vertical-align: top; text-align: left;">
+					<td colspan="2" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 10px 0; vertical-align: top; text-align: left; padding-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px;">
+						<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">{{ labels.orderShipmentBlob2|safe }}</p>
+					</td>
+				</tr>
+		</tfoot>
+	</table>
+
+	{% for package in model.packages %}
+		<table class="twelve columns order" style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; margin: 0 auto; width: 580px; margin-bottom: 10px;">
+			<thead>
+				<tr class="order-shipped-header" style="padding: 0; vertical-align: top; text-align: left;">
+					<td class="align-left" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">
+						{% with package.fulfillmentDate|date:"F j, Y" as fulfillmentDate %}
+							{{ labels.orderShippedPkgHeader|string_format(fulfillmentDate, package.shippingMethodName) }}
+						{% endwith %}
+					</td>
+
+					<td class="align-right" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: right; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">
+						{{ package.trackingNumber }}
+					</td>
+				</tr>
+
+				<tr style="padding: 0; vertical-align: top; text-align: left;">
+					<td class="align-left" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">
+						{{ labels.product }}
+					</td>
+
+					<td style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: center; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">
+						{{ labels.qty }}
+					</td>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for packageItem in package.items %}
+					{% for item in model.items %}
+						{% if item.product.productUsage == "Bundle" %}
+							{% for bundledProduct in item.product.bundledProducts %}
+								{% comment %} Do we want this? If they ordered a bundle, should they even have to check? {% endcomment %}
+								{% if packageItem.productCode == bundledProduct.productCode %}
+									<tr style="padding: 0; vertical-align: top; text-align: left;">
+										<td class="align-left nowrap" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px; white-space: nowrap; border-bottom: 1px solid #666; padding-top: 10px;">
+											{{ bundledProduct.name }}
+											<br />
+											<span class="grey" style="color: lightgrey;">{{ bundledProduct.productCode }}</span>
+										</td>
+										
+										<td style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: center; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; padding-top: 10px;">
+											{{ bundledProduct.quantity }}
+										</td>
+									</tr>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% if packageItem.productCode == item.product.productCode or packageItem.productCode == item.product.variationProductCode %}
+								<tr style="padding: 0; vertical-align: top; text-align: left;">
+									<td class="align-left nowrap" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px; white-space: nowrap; border-bottom: 1px solid #666; padding-bottom: 10px;">
+										{{ item.product.name }}
+									</td>
+
+									<td class="nowrap" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: center; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px; white-space: nowrap; border-bottom: 1px solid #666; padding-bottom: 10px;">
+										{{ packageItem.quantity }}
+									</td>
+								</tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endfor %}
+{% endblock body-content %}

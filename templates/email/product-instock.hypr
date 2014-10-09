@@ -1,0 +1,58 @@
+{% extends "email/email" %}
+
+{% block body-content %}
+	<table class="twelve columns" style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; margin: 0 auto; width: 580px;">
+		<tr style="padding: 0; vertical-align: top; text-align: left;">
+			<td class="intro" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 0px 0px 10px; vertical-align: top; text-align: left; padding-bottom: 20px; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px; padding-top: 10px;">
+				<p class="greeting" style="margin: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px; margin-bottom: 10px;">
+					{% if user and user.firstName %}
+						{{ labels.orderWelcome }} {{model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingrgContact.lastNameOrSurname }},
+					{% else %}
+						{{ labels.emailOpeningAlternative|safe }}
+					{% endif %}
+				</p>
+
+				<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">{{ labels.inStockBlob1|string_format(siteContext.generalSettings.websiteName)|safe }}</p>
+			</td>
+		</tr>
+	</table>
+
+	<table class="twelve columns details" style="border-spacing: 0; border-collapse: collapse; padding: 0; vertical-align: top; text-align: left; margin: 0 auto; width: 580px; margin-bottom: 10px;">
+		<thead>
+			<tr style="padding: 0; vertical-align: top; text-align: left;">
+				<td class="align-center" width="100" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: center; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">&nbsp;</td>
+				<td class="align-left" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">{{ labels.product }}</td>
+				<td class="align-right" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: right; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">{{ labels.price }}</td>			
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr style="padding: 0; vertical-align: top; text-align: left;">
+				<td class="align-center" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 10px 0; vertical-align: top; text-align: center; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px;">
+					{% if model.content.productImages %}
+						<a href="https://{{ domainName }}/p/{{ model.product.productCode }}" class="block-center" style="display: block; float: none; margin-left: auto; margin-right: auto;">
+							<img src="{{ model.content.productImages.0.imageUrl }}?size=100" alt="{{ model.content.productName }}" class="block-center" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%; float: none; clear: both; display: block; border: none; margin-left: auto; margin-right: auto;" />
+						</a>
+					{% endif %}
+				</td>
+
+				<td class="align-left" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 10px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px;">
+					<a href="https://{{ domainName }}/p/{{ mode.productCode }}" class="blue">{{ model.content.productName }}</a>
+
+					<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">
+						<span class="grey" style="color: lightgrey;">{{ model.productCode }}</span>
+					</p>
+				</td>
+
+				<td class="align-right" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 10px 0; vertical-align: top; text-align: right; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px;">
+					{{ model.price.price|currency }}
+				</td>
+
+				<!-- {% dump model %} -->
+			</tr>
+		</tbody>
+	</table>
+
+	<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">{{ labels.inStockBlob2|string_format(domainName, model.productCode)|safe }}</p>
+{% endblock body-content %}
+
