@@ -26,8 +26,10 @@ This project uses [Node](http://nodejs.org/), which is required for any compilat
 
 Getting started is simple enough. Download or clone this repo, then integrate its contents into your local working directory. For most files in the repo, an overwrite is okay. However, the contents of `gruntfile.js` and `package.json` will need to be integrated into yours.
 
+To kick things off, run the following from the command line:
+
 ``` bash
-npm install
+$ npm install
 ```
 
 This will install the following dependencies:
