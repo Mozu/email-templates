@@ -1,57 +1,68 @@
 ﻿module.exports = function (grunt) {
+
+  // loads tasks
+  require('load-grunt-tasks')(grunt);
+
+  // Load /tasks directory
+  grunt.loadTasks('tasks');
+
+
+  // process paths
+  var path = {
+      labels:   './labels',
+      emailSrc: './templates/email_src',
+      emails:   './templates/email'
+    }
+
+    ;
+
+
   // initialize configuration
   grunt.initConfig({
+
+    pkg: grunt.file.readJSON('package.json'),
+
     jsonlint: {
       default: {
-        src: ['labels/**/*.json']
+        src: [path.labels + '/**/*.json']
       }
     },
+
     juice: {
       emails: {
+        options: {
+          extraCss: grunt.file.read(path.emailSrc + '/email.css')
+        },
+
         files: [{
           expand: true,
-          cwd: 'templates/email/src',
+          cwd: path.emailSrc + '/',
           src: ['**/*.hypr*'],
-          dest: 'templates/email/',
+          dest: path.emails + '/',
           ext: '.hypr'
-        }],
-        options: {
-          extraCss: grunt.file.read('templates/email/src/email.css')
-        }
+        }]
       }
     },
+
     watch: {
       json: {
-        files: ['labels/**/*.json'],
+        files: [path.labels + '/**/*.json'],
         tasks: ['jsonlint'],
         options: {
           spawn: false
         }
       },
+
       emails: {
-        files: ['templates/email/src/**/*'],
-        tasks: ['juice', 'strainer:' + 'templates/email/*.hypr*']
+        files: [path.emailSrc + '/**/*'],
+        tasks: ['juice', 'strainer:' + path.emails + '/*.hypr*']
       }
     }
   });
 
-  // loads tasks
-  ['grunt-jsonlint',
-   'grunt-contrib-watch',
-   'grunt-juice-email'].forEach(grunt.loadNpmTasks);
-
-  // filters out unnecessary tags from email partials
-  grunt.registerTask('strainer', "Remove unnecessary HTML tags in email partials.", function (partials) {
-    grunt.file.expand(partials).map(function(filePath) {
-      var oldHtml = grunt.file.read(filePath),
-      newHtml = oldHtml.replace(/<html><body+\s+[^>]*>/g, '').replace('</body></html>', '');
-      grunt.file.write(filePath, newHtml);
-      grunt.log.writeln('File "' + filePath + '" filtered.');
-    });
-    grunt.log.oklns('Email partials are now pulp-free and ready for production.');
-  });
 
   // registers tasks
-  grunt.registerTask('email', ['juice', 'strainer:' + 'templates/email/*.hypr*']);
+  grunt.registerTask('email', ['juice', 'strainer:' + path.emails + '/*.hypr*']);
   grunt.registerTask('default', ['email']);
+
 };

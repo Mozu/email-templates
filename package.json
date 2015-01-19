@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "mozu-email-templates",
   "author": "Volusion, Inc.",
   "description": null,
@@ -7,9 +7,14 @@
     "grunt": "~0.4",
     "grunt-contrib-watch": "~0.6",
     "grunt-jsonlint": "~1.0",
-    "grunt-juice-email": "~0.1.0"
+    "grunt-juice-email": "~0.1.0",
+    "load-grunt-tasks": "^2.0.0"
   },
   "engines": {
-	"node": ">=0.10"
+    "node": ">=0.10"
+  },
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "twig": "^0.7.2"
   }
 }
