@@ -1,5 +1,6 @@
 "use strict";
 
+// SWIG DOCS: http://paularmstrong.github.io/swig/
 
 var _     = require('lodash')
   , swig  = require('swig')
