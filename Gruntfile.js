@@ -9,10 +9,10 @@
 
   // process paths
   var path = {
-      labels:   './labels',
-      emailSrc: './templates/email_src',
-      emails:   './templates/email'
-    }
+        labels:   './labels',
+        emailSrc: './templates/email_src',
+        emails:   './templates/email'
+      }
 
     ;
 
