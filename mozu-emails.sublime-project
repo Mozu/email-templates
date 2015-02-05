@@ -3,7 +3,7 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "/Users/brandtley_mcminn/github/email-templates",
+			"path": ".",
       "file_exclude_paths": [
       ],
       "folder_exclude_paths": [
