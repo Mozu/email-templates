@@ -22,7 +22,7 @@
 			<tr>
 				<td class="align-center" width="100">&nbsp;</td>
 				<td class="align-left">{{ labels.product }}</td>
-				<td class="align-right">{{ labels.price }}</td>			
+				<td class="align-right">{{ labels.price }}</td>
 			</tr>
 		</thead>
 

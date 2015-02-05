@@ -62,7 +62,7 @@
 
 
   // registers tasks
-  grunt.registerTask('email', ['juice', 'strainer:' + path.emails + '/*.hypr*']);
+  grunt.registerTask('email', ['juice', 'strainer:' + path.emails + '/*.hypr*', 'email-swig']);
   grunt.registerTask('default', ['email']);
 
 };

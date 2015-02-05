@@ -22,7 +22,7 @@
 			<tr style="padding: 0; vertical-align: top; text-align: left;">
 				<td class="align-center" width="100" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: center; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">&nbsp;</td>
 				<td class="align-left" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">{{ labels.product }}</td>
-				<td class="align-right" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: right; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">{{ labels.price }}</td>			
+				<td class="align-right" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: right; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; white-space: nowrap;">{{ labels.price }}</td>
 			</tr>
 		</thead>
 

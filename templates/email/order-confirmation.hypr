@@ -34,7 +34,7 @@
 
 					<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">
 						<strong>{{ labels.shipTo }}:</strong><br />
-						{% include "emails/modules/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+						{% include "email/modules/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
 					</p>
 				</td>
 
@@ -61,7 +61,7 @@
 
 					<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">
 						<strong>Billing Information:</strong><br />
-						{% include "emails/modules/email-address-summary" with model=model.billingInfo.billingContact %}
+						{% include "email/modules/email-address-summary" with model=model.billingInfo.billingContact %}
 					</p>
 				</td>
 			</tr>
@@ -97,13 +97,13 @@
 					<td style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: center; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px; border-bottom: 1px solid #666; padding-top: 10px; padding-bottom: 10px;">{{ item.quantity }}</td>
 
 					<td class="nowrap" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: center; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px; white-space: nowrap; border-bottom: 1px solid #666; padding-top: 10px; padding-bottom: 10px;">
-						{% include "emails/modules/email-item-price" %}
+						{% include "email/modules/email-item-price" %}
 					</td>
 
 					<td class="align-right nowrap" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 5px 0; vertical-align: top; text-align: right; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px; white-space: nowrap; border-bottom: 1px solid #666; padding-top: 10px; padding-bottom: 10px;">
-						{% include "emails/modules/email-item-total" with isEmail=true %}
+						{% include "email/modules/email-item-total" with isEmail=true %}
 					</td>
-				</tr>			 
+				</tr>
 			{% endfor %}
 		</tbody>
 
@@ -148,3 +148,4 @@
 		</tfoot>
 	</table>
 {% endblock body-content %}
+

@@ -4,6 +4,7 @@
   "description": null,
   "version": "1.0.0",
   "devDependencies": {
+    "accounting": "^0.4.1",
     "grunt": "~0.4",
     "grunt-contrib-watch": "~0.6",
     "grunt-jsonlint": "~1.0",

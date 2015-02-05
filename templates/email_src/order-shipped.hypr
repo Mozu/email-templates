@@ -34,7 +34,7 @@
 
 					<p>
 						<strong>{{ labels.orderDate }}:</strong><br>
-						{{ model.auditInfo.createDate|date:"F j, Y" }}
+						{{ model.auditInfo.createDate|date("F j, Y") }}
 					</p>
 
 					<p>
@@ -48,7 +48,7 @@
 				<td width="50%">
 					<p>
 						<strong>{{ labels.shipTo }}:</strong><br>
-						{% include "emails/modules/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+						{% include "email/modules/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
 					</p>
 				</td>
 			</tr>
@@ -68,9 +68,8 @@
 			<thead>
 				<tr class="order-shipped-header">
 					<td class="align-left">
-						{% with package.fulfillmentDate|date:"F j, Y" as fulfillmentDate %}
-							{{ labels.orderShippedPkgHeader|string_format(fulfillmentDate, package.shippingMethodName) }}
-						{% endwith %}
+						{{ labels.orderShippedPkgHeader|string_format(package.fulfillmentDate|date("F j, Y"), package.shippingMethodName) }}
+
 					</td>
 
 					<td class="align-right">
@@ -94,7 +93,9 @@
 					{% for item in model.items %}
 						{% if item.product.productUsage == "Bundle" %}
 							{% for bundledProduct in item.product.bundledProducts %}
-								{% comment %} Do we want this? If they ordered a bundle, should they even have to check? {% endcomment %}
+								{% comment %}
+									Do we want this? If they ordered a bundle, should they even have to check?
+								{% endcomment %}
 								{% if packageItem.productCode == bundledProduct.productCode %}
 									<tr>
 										<td class="align-left nowrap">
@@ -102,7 +103,7 @@
 											<br>
 											<span class="grey">{{ bundledProduct.productCode }}</span>
 										</td>
-										
+
 										<td>
 											{{ bundledProduct.quantity }}
 										</td>

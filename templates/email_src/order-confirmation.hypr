@@ -34,7 +34,7 @@
 
 					<p>
 						<strong>{{ labels.shipTo }}:</strong><br>
-						{% include "emails/modules/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+						{% include "email/modules/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
 					</p>
 				</td>
 
@@ -61,7 +61,7 @@
 
 					<p>
 						<strong>Billing Information:</strong><br>
-						{% include "emails/modules/email-address-summary" with model=model.billingInfo.billingContact %}
+						{% include "email/modules/email-address-summary" with model=model.billingInfo.billingContact %}
 					</p>
 				</td>
 			</tr>
@@ -97,13 +97,13 @@
 					<td>{{ item.quantity }}</td>
 
 					<td class="nowrap">
-						{% include "emails/modules/email-item-price" %}
+						{% include "email/modules/email-item-price" %}
 					</td>
 
 					<td class="align-right nowrap">
-						{% include "emails/modules/email-item-total" with isEmail=true %}
+						{% include "email/modules/email-item-total" with isEmail=true %}
 					</td>
-				</tr>			 
+				</tr>
 			{% endfor %}
 		</tbody>
 

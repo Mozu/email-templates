@@ -2,7 +2,7 @@
 
 // THIS IS A WEIRD PROBLEM I'M CURRENTLY WORKING OUT...
 ```bash
-npm install git://github.com:zetlen/swig.git
+npm install git://github.com/zetlen/swig.git
 ```
 
 
@@ -67,3 +67,18 @@ Once you trust the process, run `grunt watch` from the command line. Grunt will 
 * [Getting Started with Grunt](http://gruntjs.com/getting-started)
 * [Ink Docs](http://zurb.com/ink/docs.php)
 * [Configuring Taks with Grunt](http://gruntjs.com/configuring-tasks)
+
+
+search fo swig docs = https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=swig%20js%20loaders%20examples
+
+Swig docs on template loaders - 
+http://paularmstrong.github.io/swig/docs/loaders/
+
+Help on template loader - 
+http://blog.hostilefork.com/express-swig-node-basics-2014/
+
+Swig default extension - 
+http://stackoverflow.com/questions/25787086/swig-template-default-extension
+
+docs on swig options - 
+https://sourcegraph.com/github.com/paularmstrong/swig/.CommonJSPackage/swig/.def/commonjs/lib/swig.js/-/setExtension
