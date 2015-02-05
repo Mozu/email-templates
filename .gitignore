@@ -28,4 +28,4 @@ build/Release
 .lock-wscript
 
 # Sublime configs
-*.sublime-*
+*.sublime-workspace

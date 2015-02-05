@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/Users/brandtley_mcminn/github/email-templates",
+      "file_exclude_paths": [
+      ],
+      "folder_exclude_paths": [
+        "node_modules"
+      ]
+		}
+	]
+}
