@@ -1,5 +1,11 @@
 # Mozu Email Templates
 
+// THIS IS A WEIRD PROBLEM I'M CURRENTLY WORKING OUT...
+```bash
+npm install git://github.com:zetlen/swig.git
+```
+
+
 A collection of email templates for use with the Mozu core theme.
 
 ## What's Included
