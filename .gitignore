@@ -30,4 +30,4 @@ build/Release
 # Sublime configs
 *.sublime-workspace
 /__*
-email/
+/templates/email/
