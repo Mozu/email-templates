@@ -58,8 +58,10 @@ module.exports = function (grunt) {
 
       filename = filePath.split('/');
 
+
       template = swig.renderFile(filePath, {});
 
+      debugger;
       // grunt.file.write('../email_templates/', template);
 
       // grunt.log.writeln(template);
