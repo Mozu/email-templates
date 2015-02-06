@@ -1,0 +1,120 @@
+{% extends "email/email" %}
+
+{% block body-content %}
+	<!-- basic message -->
+	<table class="twelve columns">
+		<tr>
+			<td class="intro">
+				<p class="greeting">
+					{% if user and user.firstName %}
+						{{ labels.orderWelcome }} {{model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingrgContact.lastNameOrSurname }},
+					{% else %}
+						{{ labels.emailOpeningAlternative|safe }}
+					{% endif %}
+				</p>
+
+				<p>
+					{{ labels.returnRejectedBlob1|string_format(siteContext.generalSettings.websiteName, domainName)|safe }}
+				</p>
+			</td>
+		</tr>
+	</table>
+
+	<table class="twelve columns details fixed">
+		<thead>
+			<tr>
+				<td colspan="3">{{ labels.returnDetails }}</td>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td>
+					<p>
+						<strong>{{ labels.returnNumber }}:</strong><br>
+						{{ model.returnNumber }}
+					</p>
+				</td>
+
+				<td>
+					<p>
+						<strong>{{ labels.orderDate }}:</strong><br>
+						{{ model.auditInfo.createDate|date("F j, Y") }}
+					</p>
+				</td>
+
+				<td>
+					<p>
+						<strong>{{ labels.returnRequestDate }}:</strong><br>
+						{{ model.rmaDeadline|date("F j, Y") }}
+					</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table class="twelve columns order">
+		<thead>
+			<tr>
+				<td>&nbsp;</td>
+
+				<td class="align-left">
+					{{ labels.product }}
+				</td>
+
+				<td class="align-center">
+					{{ labels.reasonForReturn }}
+				</td>
+			</tr>
+		</thead>
+
+		<tbody>
+			{% for item in model.items %}
+				<tr>
+					{% if item.product.imageUrl and item.product.imageUrl != "" %}
+						<td class="align-center" width="100">
+							<a href="https://{{ domainName }}/p/{{ item.product.productCode }}" class="block-center">
+								<img src="{{ item.product.imageUrl }}?size=100" alt="{{ item.product.name }}" class="block-center">
+							</a>
+						</td>
+					{% endif %}
+
+					<td class="align-left">
+						{{ item.product.name }}<br>
+						<span class="grey">{{ item.product.productCode }}</span>
+
+						{% comment %} Come back to this when we figure out how to handle RMA items purchased in bundles. - tb {% endcomment %}
+
+						{% if item.product.productUsage == "Bundle" %}
+							<br>
+							{% for bundleProduct in item.product.bundleProducts %}
+								<strong>{{bundledProduct.productCode}}:</strong>{{ bundledProduct.name }} ({{bundledProduct.quantity }})
+								{% if not forloop.last %}<br>{% endif %}
+							{% endfor %}
+						{% endif %}
+					</td>
+
+					<td class="align-center">
+						{% for reason in item.reasons %}
+							{{ reason.reason }} &times; {{ reason.quantity }}
+
+							{% if not forloop.first %}
+								<br>
+							{% endif %}
+						{% endfor %}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<table class="twelve columns">
+		<tr>
+			<td>
+				<p>
+					{{ labels.returnRejectedBlob2|safe }}
+				</p>
+			</td>
+		</tr>
+	</table>
+{% endblock body-content %}

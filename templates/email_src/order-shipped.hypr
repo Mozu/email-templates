@@ -1,0 +1,131 @@
+{% extends "email/email" %}
+
+{% block body-content %}
+	<!-- basic message -->
+	<table class="twelve columns">
+		<tr>
+			<td class="intro">
+				<p class="greeting">
+					{{ labels.orderWelcome }} {{model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingContact.lastNameOrSurname }},
+				</p>
+
+				<p>
+					{{ labels.orderShipmentBlob1|string_format(siteContext.generalSettings.websiteName, domainName, model.fulfillmentInfo.shippingMethodName)|safe }}
+				</p>
+			</td>
+		</tr>
+	</table>
+
+	<!-- order information -->
+	<table class="twelve columns details">
+		<thead>
+			<tr>
+				<td colspan="2">{{ labels.orderDetails }}</td>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td width="50%">
+					<p>
+						<strong>{{ labels.orderNo }}:</strong><br>
+						{{ model.orderNumber }}
+					</p>
+
+					<p>
+						<strong>{{ labels.orderDate }}:</strong><br>
+						{{ model.auditInfo.createDate|date("F j, Y") }}
+					</p>
+
+					<p>
+						<strong>{{ labels.trackingNumber}}:</strong><br>
+						{% for package in model.packages %}
+							{{ package.trackingNumber }}<br>
+						{% endfor %}
+					</p>
+				</td>
+
+				<td width="50%">
+					<p>
+						<strong>{{ labels.shipTo }}:</strong><br>
+						{% include "email/modules/email-address-summary" with model=model.fulfillmentInfo.fulfillmentContact %}
+					</p>
+				</td>
+			</tr>
+		</tbody>
+
+		<tfoot>
+				<tr>
+					<td colspan="2">
+						<p>{{ labels.orderShipmentBlob2|safe }}</p>
+					</td>
+				</tr>
+		</tfoot>
+	</table>
+
+	{% for package in model.packages %}
+		<table class="twelve columns order">
+			<thead>
+				<tr class="order-shipped-header">
+					<td class="align-left">
+						{{ labels.orderShippedPkgHeader|string_format(package.fulfillmentDate|date("F j, Y"), package.shippingMethodName) }}
+
+					</td>
+
+					<td class="align-right">
+						{{ package.trackingNumber }}
+					</td>
+				</tr>
+
+				<tr>
+					<td class="align-left">
+						{{ labels.product }}
+					</td>
+
+					<td>
+						{{ labels.qty }}
+					</td>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for packageItem in package.items %}
+					{% for item in model.items %}
+						{% if item.product.productUsage == "Bundle" %}
+							{% for bundledProduct in item.product.bundledProducts %}
+								{% comment %}
+									Do we want this? If they ordered a bundle, should they even have to check?
+								{% endcomment %}
+								{% if packageItem.productCode == bundledProduct.productCode %}
+									<tr>
+										<td class="align-left nowrap">
+											{{ bundledProduct.name }}
+											<br>
+											<span class="grey">{{ bundledProduct.productCode }}</span>
+										</td>
+
+										<td>
+											{{ bundledProduct.quantity }}
+										</td>
+									</tr>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							{% if packageItem.productCode == item.product.productCode or packageItem.productCode == item.product.variationProductCode %}
+								<tr>
+									<td class="align-left nowrap">
+										{{ item.product.name }}
+									</td>
+
+									<td class="nowrap">
+										{{ packageItem.quantity }}
+									</td>
+								</tr>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endfor %}
+{% endblock body-content %}

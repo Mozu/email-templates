@@ -1,0 +1,13 @@
+{% if item.discountedTotal and item.discountedTotal < item.unitPrice.baseAmount %}
+	<span class="mz-item-rowtotal is-crossedout" style="text-decoration: line-through;">
+		{{ item.unitPrice.baseAmount|currency }}
+	</span>
+	<br>
+	<span class="mz-item-rowtotal {% if item.unitPrice.saleAmount %}is-saleprice{% endif %}">
+		{{ item.discountedTotal|currency }}
+	</span>
+{% else %}
+	<span class="mz-item-rowtotal {% if item.unitPrice.saleAmount %}is-saleprice{% endif %}">
+		{{ item.extendedTotal|currency }}
+	</span>
+{% endif %}

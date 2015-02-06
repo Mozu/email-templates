@@ -1,0 +1,40 @@
+{% with item.productDiscounts|first as itemHasDiscount %}
+	{% if item.unitPrice.discountAmount %}
+		{% if itemHasDiscount %} 
+			<span class="mz-item-price is-crossedout" style="text-decoration: line-through;">
+				{{ item.unitPrice.baseAmount|currency }}
+			</span>
+			<br>
+			<span class="mz-item-price is-saleprice">
+				{{ item.unitPrice.discountedAmount|currency }}
+			</span>
+			<br>
+			{% comment %} Item-level discounts {% endcomment %}
+			{% for productDiscount in item.productDiscounts %}
+				<div class="mz-item-discount">
+					<small class="grey mz-item-discountname">
+						{{ productDiscount.discount.name }}
+					</small>
+
+					{% if productDiscount.discount.freeShipping %}
+						<small class="grey mz-item-discountamt">
+							{{ labels.freeShipping }}
+						</small>
+					{% else %}
+						<small class="grey mz-item-discountamt">
+							({{ productDiscount.impact|currency }} off)
+						</small>
+					{% endif %}
+				</div>
+			{% endfor %}
+		{% else %}
+			<span class="mz-item-price">
+				{{ item.unitPrice.extendedAmount|currency }}
+			</span>
+		{% endif %}
+	{% else %}
+		<span class="mz-item-price">
+			{{ item.unitPrice.extendedAmount|currency }}
+		</span>
+	{% endif %}
+{% endwith %}

@@ -1,0 +1,20 @@
+{
+  "name": "mozu-email-templates",
+  "author": "Volusion, Inc.",
+  "description": "Email build/processing tools and local rendering for testing.",
+  "version": "1.0.0",
+  "repository": "https://github.com/Mozu/email-templates",
+  "devDependencies": {
+    "accounting": "^0.4.1",
+    "grunt": "~0.4",
+    "grunt-contrib-watch": "~0.6",
+    "grunt-jsonlint": "~1.0",
+    "grunt-juice-email": "~0.1.0",
+    "load-grunt-tasks": "^2.0.0",
+    "swig": "git://github.com/zetlen/swig.git#master",
+    "lodash": "^2.4.1"
+  },
+  "engines": {
+    "node": ">=0.10"
+  }
+}
