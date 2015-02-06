@@ -27,7 +27,10 @@ build/Release
 # Users Environment Variables
 .lock-wscript
 
+# test directories
+/___*
+/templates/email/
+
 # Sublime configs
 *.sublime-workspace
-/__*
-/templates/email/
+
