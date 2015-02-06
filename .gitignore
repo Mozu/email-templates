@@ -29,3 +29,4 @@ build/Release
 
 # Sublime configs
 *.sublime-workspace
+/__*
