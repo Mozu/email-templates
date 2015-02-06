@@ -3,6 +3,7 @@
   "author": "Volusion, Inc.",
   "description": null,
   "version": "1.0.0",
+  "repository": "https://github.com/Mozu/email-templates",
   "devDependencies": {
     "accounting": "^0.4.1",
     "grunt": "~0.4",
@@ -10,7 +11,7 @@
     "grunt-jsonlint": "~1.0",
     "grunt-juice-email": "~0.1.0",
     "load-grunt-tasks": "^2.0.0",
-    "zetlen/swig": "*"
+    "swig": "git://github.com/zetlen/swig.git#master"
   },
   "engines": {
     "node": ">=0.10"

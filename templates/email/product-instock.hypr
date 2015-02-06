@@ -48,7 +48,6 @@
 					{{ model.price.price|currency }}
 				</td>
 
-				<!-- {% dump model %} -->
 			</tr>
 		</tbody>
 	</table>

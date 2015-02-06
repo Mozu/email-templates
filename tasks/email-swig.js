@@ -4,12 +4,12 @@ module.exports = function (grunt) {
 
   var _         = require('lodash')
     , swig      = require('swig')
-    , loader    = require('../__swig/loader')
+    , loader    = require('./__swig/loader')
 
       // swig tags...
-    , tCmsRes   = require('../__swig/t_cms_resources')
-    , tComment  = require('../__swig/t_comment')
-    , tDump     = require('../__swig/t_dump')
+    , tCmsRes   = require('./__swig/t_cms_resources')
+    , tComment  = require('./__swig/t_comment')
+    , tDump     = require('./__swig/t_dump')
     ;
 
 
@@ -24,29 +24,30 @@ module.exports = function (grunt) {
 
   // SWIG DOCS: http://paularmstrong.github.io/swig/
   swig.setDefaults({
-    loader:   loader(process.cwd() + '/templates' )
+    loader:   loader(process.cwd() + '/templates')
   });
 
 
 
   // Register custom tags
-  //  swig.setTag( name ,           parse,          compile,          ends,   blockLevel )
+  //  swig.setTag( name ,           parse,           compile,           ends,   blockLevel )
       swig.setTag('cms_resources',  tCmsRes.parse,   tCmsRes.compile,   false,  false);
       swig.setTag('comment',        tComment.parse,  tComment.compile,  true,   true);
       swig.setTag('dump',           tDump.parse,     tDump.compile,     false,  false);
 
 
   // Register custom filters
-  swig.setFilter('string_format', require('../__swig/f_string_format'));
-  swig.setFilter('currency',      require('../__swig/f_currency'));
+  swig.setFilter('string_format', require('./__swig/f_string_format'));
+  swig.setFilter('currency',      require('./__swig/f_currency'));
 
 
-  grunt.registerTask('email-swig', 'Compiles email templates with Swig to.', function() {
+  // Register email swig
+  grunt.registerTask('email-swig', 'Compiles email templates with Swig.', function() {
 
     var emails = grunt.file.expand({}, paths.email.src + '/*.hypr')
       , template
+      , filename
       ;
-
 
     _.each(emails, function(filePath) {
 
@@ -55,9 +56,13 @@ module.exports = function (grunt) {
 
       grunt.log.writeln(filePath);
 
+      filename = filePath.split('/');
+
       template = swig.renderFile(filePath, {});
 
-      grunt.log.writeln(template);
+      // grunt.file.write('../email_templates/', template);
+
+      // grunt.log.writeln(template);
 
     });
 
@@ -73,9 +78,6 @@ module.exports = function (grunt) {
     //   ]
     // });
 
-
-
-    // grunt.log.writeln(template);
 
   });
 
