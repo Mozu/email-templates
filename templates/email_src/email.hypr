@@ -23,7 +23,7 @@
                     <td class="wrapper last">
                       {% block body-content %}
                       {% endblock body-content %}
-                
+
                       <div>{{ViewData.content.html_2|safe}}</div>
                     </td>
                   </tr>
@@ -33,7 +33,7 @@
                   <tr>
                     <td class="wrapper last">
                       <p>
-                        Sincerely,
+                        {{ labels.sincerely }},
                       </p>
 
                       <p>

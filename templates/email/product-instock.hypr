@@ -31,7 +31,10 @@
 				<td class="align-center" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 10px 0; vertical-align: top; text-align: center; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px;">
 					{% if model.content.productImages %}
 						<a href="https://{{ domainName }}/p/{{ model.product.productCode }}" class="block-center" style="display: block; float: none; margin-left: auto; margin-right: auto;">
-							<img src="{{ model.content.productImages.0.imageUrl }}?size=100" alt="{{ model.content.productName }}" class="block-center" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%; float: none; clear: both; display: block; border: none; margin-left: auto; margin-right: auto;" />
+						  {% comment %}
+						  	can't seem to parse indexes in value calls in django...
+						  {% endcomment %}
+							<img src="{{ model.content.productImages|first.imageUrl }}?size=100" alt="{{ model.content.productName }}" class="block-center" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%; float: none; clear: both; display: block; border: none; margin-left: auto; margin-right: auto;" />
 						</a>
 					{% endif %}
 				</td>

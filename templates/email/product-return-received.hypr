@@ -39,14 +39,14 @@
 				<td style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 10px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px;">
 					<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">
 						<strong>{{ labels.orderDate }}:</strong><br />
-						{{ model.auditInfo.createDate|date:"F j, Y" }}
+						{{ model.auditInfo.createDate|date("F j, Y") }}
 					</p>
 				</td>
 
 				<td style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse; padding: 10px 0; vertical-align: top; text-align: left; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; margin: 0; line-height: 19px; font-size: 14px;">
 					<p style="margin: 0; margin-bottom: 0; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; padding: 0; text-align: left; line-height: 19px; font-size: 14px;">
 						<strong>{{ labels.returnRequestDate }}:</strong><br />
-						{{ model.rmaDeadline|date:"F j, Y" }}
+						{{ model.rmaDeadline|date("F j, Y") }}
 					</p>
 				</td>
 			</tr>
@@ -124,3 +124,4 @@
 		</tr>
 	</table>
 {% endblock body-content %}
+

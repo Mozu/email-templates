@@ -31,7 +31,10 @@
 				<td class="align-center">
 					{% if model.content.productImages %}
 						<a href="https://{{ domainName }}/p/{{ model.product.productCode }}" class="block-center">
-							<img src="{{ model.content.productImages.0.imageUrl }}?size=100" alt="{{ model.content.productName }}" class="block-center">
+						  {% comment %}
+						  	can't seem to parse indexes in value calls in django...
+						  {% endcomment %}
+							<img src="{{ model.content.productImages|first.imageUrl }}?size=100" alt="{{ model.content.productName }}" class="block-center">
 						</a>
 					{% endif %}
 				</td>

@@ -39,14 +39,14 @@
 				<td>
 					<p>
 						<strong>{{ labels.orderDate }}:</strong><br>
-						{{ model.auditInfo.createDate|date:"F j, Y" }}
+						{{ model.auditInfo.createDate|date("F j, Y") }}
 					</p>
 				</td>
 
 				<td>
 					<p>
 						<strong>{{ labels.returnRequestDate }}:</strong><br>
-						{{ model.rmaDeadline|date:"F j, Y" }}
+						{{ model.rmaDeadline|date("F j, Y") }}
 					</p>
 				</td>
 			</tr>
