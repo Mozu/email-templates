@@ -10,7 +10,7 @@
 				</p>
 
 				<p>
-					{{ labels.orderShipmentBlob1|string_format(siteContext.generalSettings.websiteName, domainName, model.fulfillmentInfo.shippingMethodName)|safe }}
+					{{ labels.orderShipmentBlob1|string_format(siteContext.generalSettings.websiteName, siteContext.domains.current.domainName, model.fulfillmentInfo.shippingMethodName)|safe }}
 				</p>
 			</td>
 		</tr>

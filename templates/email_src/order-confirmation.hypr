@@ -6,7 +6,7 @@
 		<tr>
 			<td class="intro">
 				<p class="greeting">{{ labels.orderWelcome }} {{model.billingInfo.billingContact.firstName }} {{ model.billingInfo.billingContact.lastNameOrSurname }},</p>
-				<p>{{ labels.orderConfirmationBlob1|string_format(siteContext.generalSettings.websiteName, domainName)|safe }}</p>
+				<p>{{ labels.orderConfirmationBlob1|string_format(siteContext.generalSettings.websiteName, siteContext.domains.current.domainName)|safe }}</p>
 			</td>
 		</tr>
 	</table>
@@ -41,7 +41,7 @@
 				<td>
 					<p>
 						<strong>{{ labels.orderDate }}:</strong>
-						{{ model.auditInfo.createDate }}
+						{{ model.auditInfo.createDate|date('F j, Y') }}
 					</p>
 
 					<p>

@@ -33,13 +33,7 @@
                   <tr>
                     <td class="wrapper last">
                       <p>
-                        {{ labels.sincerely }},
-                      </p>
-
-                      <p>
-                        Your <a href="http://{{ domainName }}">{{ siteContext.generalSettings.websiteName }}</a> Customer Service Team
-                        <br>
-                        http://{{ domainName }}
+                        {{ labels.emailClosing|string_format(siteContext.domains.current.domainName, siteContext.generalSettings.websiteName)|safe }},
                       </p>
                     </td>
                   </tr>

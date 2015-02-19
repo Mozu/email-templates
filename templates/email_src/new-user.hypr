@@ -13,7 +13,7 @@
 				</p>
 
 				<p>
-					Your account has been created, and you can log in anytime at <a href="http://{{domainName}}/">{{domainName}}</a> as <strong>{% if model.UserEmailAddress %}{{model.UserEmailAddress}}{% else %}user@email.com{% endif %}</strong>.
+					Your account has been created, and you can log in anytime at <a href="http://{{siteContext.domains.current.domainName}}/">{{siteContext.domains.current.domainName}}</a> as <strong>{% if model.UserEmailAddress %}{{model.UserEmailAddress}}{% else %}user@email.com{% endif %}</strong>.
 				</p>
 			</td>
 		</tr>
