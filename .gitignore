@@ -28,7 +28,7 @@ build/Release
 .lock-wscript
 
 # test directories
-/___*
+/__email*
 /templates/email/
 __models
 
