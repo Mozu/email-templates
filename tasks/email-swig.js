@@ -51,7 +51,8 @@ module.exports = function (grunt) {
   swig.setFilter('currency',      require(paths.swig + 'f_currency'));
 
 
-  // Register email swig
+  // Register grunt task
+  // =====
   grunt.registerTask('email-swig', 'Compiles email templates with Swig.', function() {
 
     var emails = grunt.file.expand({}, paths.email.src + '*.hypr')
@@ -76,7 +77,7 @@ module.exports = function (grunt) {
       // get our model
       model = grunt.file.readJSON(paths.models + filename + '.json');
 
-      model.labels = grunt.file.readJSON(paths.labels + 'en-us.json');
+      model.labels = model.siteContext.labels = grunt.file.readJSON(paths.labels + 'en-us.json');
 
       // render the template
       template = swig.renderFile(filePath, model);
