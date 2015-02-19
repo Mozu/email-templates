@@ -1,9 +1,9 @@
+/*jshint laxbreak:true, laxcomma:true */
+/*global module, require */
 
-// http://openexchangerates.github.io/accounting.js/
-var accounting  = require('accounting')
-  ;
+module.exports = function() {
+  // http://openexchangerates.github.io/accounting.js/
+  var accounting  = require('accounting');
 
-module.exports = function(input, index) {
-  var money = accounting.formatMoney(input);
-  return money;
-}
+  return accounting.formatMoney(arguments[0]);
+};
